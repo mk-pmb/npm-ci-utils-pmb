@@ -11,7 +11,6 @@ function cli_each_subpkg () {
 
   local MIN_DEPTH=0
   (( MIN_DEPTH += 1 )) # skip '.', as it would be pruned as hidden file
-  (( MIN_DEPTH += 1 )) # exclude ./package.json
   local SUB_PKGS=(
     -mindepth "$MIN_DEPTH"
     -xdev
@@ -26,6 +25,7 @@ function cli_each_subpkg () {
     SUB="${SUB%/*}"
     SUB="${SUB#.}"
     SUB="${SUB#/}"
+    [ -n "$SUB" ] || continue
     echo "=== $* @ $SUB ==="
     cd -- "$ORIG_PWD/$SUB" || return $?
     cli_multi "$@"; RV=$?
