@@ -21,16 +21,24 @@ function cli_each_subpkg () {
     )
   readarray -t SUB_PKGS < <(find "${SUB_PKGS[@]}" | sort --version-sort)
   local ORIG_PWD="$PWD"
-  local SUB=
+  local SUB= RV=
   for SUB in "${SUB_PKGS[@]}"; do
     SUB="${SUB%/*}"
     SUB="${SUB#.}"
     SUB="${SUB#/}"
     echo "=== $* @ $SUB ==="
     cd -- "$ORIG_PWD/$SUB" || return $?
-    cli_multi "$@" || return $?
-    cd -- "$ORIG_PWD" || return $?
-    echo
+    cli_multi "$@"; RV=$?
+    if [ "$RV" == 0 ]; then
+      echo
+      cd -- "$ORIG_PWD" || return $?
+    else
+      sleep 0.25s
+      # ^-- wait for late error messages from programs like npm@7
+      echo
+      echo "E: rv=$RV in $SUB for $*" >&2
+      return "$RV"
+    fi
   done
 }
 
