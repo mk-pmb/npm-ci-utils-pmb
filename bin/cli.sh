@@ -9,7 +9,7 @@ function cli_main () {
     source -- "$LIB" --lib || return $?
   done
   unset LIB
-  cli_"$@"; return $?
+  cli_multi "$@"; return $?
 }
 
 cli_main "$@"; exit $?

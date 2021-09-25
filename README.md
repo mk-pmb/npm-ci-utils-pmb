@@ -17,11 +17,9 @@ Run a command in mostly all subdirectories that have a `package.json`,
 except for paths that look like they should be left alone
 (e.g. `node_modules` and symlinks onto external file systems).
 
-Examples:
-
 ```bash
-npm-ci-utils-pmb each_subpkg npm install .
-npm-ci-utils-pmb each_subpkg npm test
+# Example: Install all packages, then test all of them:
+npm-ci-utils-pmb each_subpkg npm install . , npm test
 ```
 
 
