@@ -1,0 +1,52 @@
+{ "name": "npm-ci-utils-pmb",
+  "version": "0.0.1",
+  "description": "Helps me work with GitHub Actions and GitLab CI.",
+  "keywords": [
+    "ci",
+    "github",
+    "gitlan",
+    "npm"
+  ],
+
+  "author": "M.K. (https://github.com/mk-pmb)",
+  "homepage": "https://github.com/mk-pmb/npm-ci-utils-pmb/#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mk-pmb/npm-ci-utils-pmb.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mk-pmb/npm-ci-utils-pmb/issues"
+  },
+  "contributors": [],
+
+  "private": false, "license": "ISC",
+
+  "type": "module",
+  "exports": "ci-utils.mjs",
+  "main##": "ci-utils.mjs",
+  "bin": "bin/cli.sh",
+  "scripts##": {
+    "lint": "elp",
+    "test": "elp && nodemjs test/all.mjs"
+  },
+  "directories": { "test": "test" },
+  "eslintConfig": { "extends": "nodejs-pmb" },
+
+  "dependencies": {},
+  "browser": {
+    "wipedisk": "./shims/wipedisk.js",
+    "./cfg/defaults.node.js": "./cfg/defaults.browsers.js",
+    "replaceMeWithEmptyObject": false,
+    "__SPEC__": "https://github.com/defunctzombie/package-browser-field-spec"
+  },
+  "devDependencies": {
+    "equal-pmb": "^0.1.6",
+    "lib-demo-util-160404": "^0.1.13"
+  },
+  "optionalDependencies": {}, "peerDependencies": {}, "bundledDependencies": [],
+  "browserify": { "transform": [ "brfs" ] },
+  "engines": { "npm": "*", "node": "*" }, "os": [], "cpu": [],
+
+
+  "npm vs. BOM = Unexpected token": "-*- coding: UTF-8 -*-"
+}
