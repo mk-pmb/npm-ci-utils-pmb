@@ -12,7 +12,11 @@ function cli_multi () {
   while [ "${#TODO[@]}" -ge 1 ]; do
     ARG="${TODO[0]}"; TODO=( "${TODO[@]:1}" )
     if [ "$ARG" == "$SEP" ]; then
-      [ "${#TASK[@]}" == 0 ] || "${TASK[@]}" || return $?
+      [ "${#TASK[@]}" == 0 ] && continue
+      case "${TASK[0]}" in
+        :* ) TASK[0]="cli_${TASK[0]#:}";;
+      esac
+      "${TASK[@]}" || return $?
       TASK=()
     else
       TASK+=( "$ARG" )

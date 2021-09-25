@@ -1,6 +1,14 @@
 # -*- coding: utf-8, tab-width: 2 -*-
 
 function cli_each_subpkg () {
+  case "$1" in
+    ci )
+      shift
+      cli_each_subpkg npm install . || return $?
+      cli_each_subpkg npm test "$@" || return $?
+      return 0;;
+  esac
+
   local MIN_DEPTH=0
   (( MIN_DEPTH += 1 )) # skip '.', as it would be pruned as hidden file
   (( MIN_DEPTH += 1 )) # exclude ./package.json
@@ -20,7 +28,7 @@ function cli_each_subpkg () {
     SUB="${SUB#/}"
     echo "=== $* @ $SUB ==="
     cd -- "$ORIG_PWD/$SUB" || return $?
-    "$@" || return $?
+    cli_multi "$@" || return $?
     cd -- "$ORIG_PWD" || return $?
     echo
   done

@@ -19,7 +19,11 @@ except for paths that look like they should be left alone
 
 ```bash
 # Example: Install all packages, then test all of them:
-npm-ci-utils-pmb each_subpkg npm install . , npm test
+npm-ci-utils-pmb each_subpkg npm install . && \
+npm-ci-utils-pmb each_subpkg npm test
+
+# Or use a nifty shortcut for the above:
+npm-ci-utils-pmb each_subpkg ci
 ```
 
 
