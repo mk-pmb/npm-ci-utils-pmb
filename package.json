@@ -1,5 +1,5 @@
 { "name": "npm-ci-utils-pmb",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Helps me work with GitHub Actions and GitLab CI.",
   "keywords": [
     "ci",
