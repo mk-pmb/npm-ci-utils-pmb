@@ -4,11 +4,14 @@ function cli_reaudit () {
   npm install --package-lock --package-lock-only . || return $?$(
     echo "E: Failed to renew package-lock.json" >&2)
   local TMP_LOG="tmp.$$.reaudit.log"
-  local DEST_LOG='audit.log'
   npm audit "$@" |& tee -- "$TMP_LOG"
   local AUDIT_RV="${PIPESTATUS[0]}"
-  [ "$AUDIT_RV" == 0 ] || DEST_LOG="${DEST_LOG%.*}.err"
-  mv --no-target-directory -- "$TMP_LOG" "$DEST_LOG" || return $?$(
+
+  local LOG_BFN='audit'
+  local LOG_FEXT='log'
+  rm -- "$LOG_BFN".{err,log} 2>/dev/null || true
+  [ "$AUDIT_RV" == 0 ] || LOG_FEXT='err'
+  mv --no-target-directory -- "$TMP_LOG" "$LOG_BFN.$LOG_FEXT" || return $?$(
     echo "E: Failed to rename audit log" >&2)
   return "$AUDIT_RV"
 }
