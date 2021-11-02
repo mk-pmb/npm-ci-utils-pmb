@@ -4,6 +4,7 @@ function cli_multi () {
   local SEP=','
   case "$1" in
     [A-Za-z0-9_/.]* ) ;;
+    :[a-z]* ) ;; # internal cli_$TASK
     * ) SEP="$1"; shift;;
   esac
   local TODO=( "$@" "$SEP" )
