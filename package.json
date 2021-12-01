@@ -1,5 +1,5 @@
 { "name": "npm-ci-utils-pmb",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Helps me work with GitHub Actions and GitLab CI.",
   "keywords": [
     "ci",
@@ -23,9 +23,8 @@
 
   "type": "module",
   "exports": "ci-utils.mjs",
-  "main##": "ci-utils.mjs",
   "bin": "bin/cli.sh",
-  "scripts##": {
+  "scripts": {
     "lint": "elp",
     "test": "elp && nodemjs test/all.mjs"
   },
